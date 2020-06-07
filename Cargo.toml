@@ -10,4 +10,6 @@ edition = "2018"
 hex-literal = "0.2.1"
 hex = { version = "0.4", default-features = false }
 hex_fmt = "0.3.0"
-
+rlp = "0.4"
+log = "0.4"
+env_logger = "0.7"
