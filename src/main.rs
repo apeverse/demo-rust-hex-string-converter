@@ -4,11 +4,13 @@ extern crate hex_literal;
 use hex_fmt::HexFmt;
 use hex::encode;
 use primitive_types::{H160, H256};
+use std::str::FromStr; // !!! Necessary for H160::from_str(address).expect("...");
 
 #[test]
 
 fn hash_hex_str() {
     // use primitive_types::{H160, H256};
+    use std::str::FromStr; // !!! Necessary for H160::from_str(address).expect("...");
     let foo = H160::from(hex!("ef2d6d194084c2de36e0dabfce45d046b37d1106"));
     println!("H160 foo {:?}", foo);
 
@@ -26,6 +28,18 @@ fn hash_hex_str() {
 
     let cat = zee.as_slice();
     println!("&[u8] {:?}", cat);
+
+    let mut bee = [0u8; 32];
+    bee.copy_from_slice(cat);
+    println!("&[u8] {:?}", bee);
+
+    let foo = H256::from(bee);
+    println!("H256 foo {:?}", foo);
+
+    // !!! Must have ethereum-types = "x.y.z" in Cargo.toml
+    // !!! use std::str::FromStr;
+    let foo = H160::from_str("ef2d6d194084c2de36e0dabfce45d046b37d1106").expect("The argument must be a valid address string.");
+    println!("H160::from_str: {}", foo);
 }
 
 #[test]
