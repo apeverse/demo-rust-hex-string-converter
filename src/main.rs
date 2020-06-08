@@ -7,10 +7,8 @@ use primitive_types::{H160, H256};
 use std::str::FromStr; // !!! Necessary for H160::from_str(address).expect("...");
 
 #[test]
-
 fn hash_hex_str() {
     // use primitive_types::{H160, H256};
-    use std::str::FromStr; // !!! Necessary for H160::from_str(address).expect("...");
     let foo = H160::from(hex!("ef2d6d194084c2de36e0dabfce45d046b37d1106"));
     println!("H160 foo {:?}", foo);
 
