@@ -29,7 +29,7 @@ fn hash_hex_str() {
 
     let mut bee = [0u8; 32];
     bee.copy_from_slice(cat);
-    println!("&[u8] {:?}", bee);
+    println!("[u8; 32] array {:?}", bee);
 
     let foo = H256::from(bee);
     println!("H256 foo {:?}", foo);
@@ -37,6 +37,7 @@ fn hash_hex_str() {
     // !!! Must have ethereum-types = "x.y.z" in Cargo.toml
     // !!! use std::str::FromStr;
     let foo = H160::from_str("ef2d6d194084c2de36e0dabfce45d046b37d1106").expect("The argument must be a valid address string.");
+    println!("H160::from_str: {:?}", foo);
     println!("H160::from_str: {}", foo);
 }
 
