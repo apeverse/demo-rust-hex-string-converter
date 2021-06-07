@@ -1,44 +1,64 @@
 
-#[macro_use]
-extern crate hex_literal;
+// #[macro_use]
+// extern crate hex_literal;
+use hex_literal::hex;
 use hex_fmt::HexFmt;
 use hex::encode;
-use primitive_types::{H160, H256};
-use std::str::FromStr; // !!! Necessary for H160::from_str(address).expect("...");
+use primitive_types::{H160, H256, U256};
+
+// !!! Necessary for H160::from_str(address).expect("...");
+use std::str::FromStr;
+use ethereum_types::BigEndianHash;
+
+
+pub fn hash_meets_difficulty(hash: &H256, difficulty: U256) -> bool {
+    let num_hash = U256::from(&hash[..]);
+    let (_, overflowed) = num_hash.overflowing_mul(difficulty);
+
+    !overflowed
+}
+
 
 #[test]
 fn hash_hex_str() {
     // use primitive_types::{H160, H256};
     let foo = H160::from(hex!("ef2d6d194084c2de36e0dabfce45d046b37d1106"));
-    println!("H160 foo {:?}", foo);
+    println!("H160 => {:?}", foo);
 
     let foo = H256::from(hex!("bc36789e7a1e281436464229828f817d6612f7b477d66591ff96a9e064bcc98a"));
-    println!("H256 foo {:?}", foo);
+    println!("H256 => {:x?}", foo);
+
+    let bar = U256::from(&foo[..]);
+    println!("U256 => {:?}", bar);
+
+    let foo = H256::from_uint(&bar);
+    println!("H256 from U256=> {:?}", foo);
 
     let bar = foo.as_bytes();
-    println!("bytes {:?}", bar);
+    println!("bytes (256bit) => {:x?}", bar);
 
     let dog : &[u8] = foo.as_bytes();
-    println!("&[u8] {:?}", dog);
+    println!("&[u8]  => {:x?}", dog);
 
     let zee : Vec<u8> = bar.into();
-    println!("Vec<u8> {:?}", zee);
+    println!("Vec<u8> => {:x?}", zee);
 
     let cat = zee.as_slice();
-    println!("&[u8] {:?}", cat);
+    println!("&[u8] => {:x?}", cat);
 
     let mut bee = [0u8; 32];
     bee.copy_from_slice(cat);
-    println!("[u8; 32] array {:?}", bee);
+    println!("[u8; 32] array => {:x?}", bee);
 
     let foo = H256::from(bee);
-    println!("H256 foo {:?}", foo);
+    println!("H256 => {:?}", foo);
 
     // !!! Must have ethereum-types = "x.y.z" in Cargo.toml
     // !!! use std::str::FromStr;
-    let foo = H160::from_str("ef2d6d194084c2de36e0dabfce45d046b37d1106").expect("The argument must be a valid address string.");
-    println!("H160::from_str: {:?}", foo);
-    println!("H160::from_str: {}", foo);
+    let foo = H160::from_str("ef2d6d194084c2de36e0dabfce45d046b37d1106")
+        .expect("The argument must be a valid address string.");
+    println!("H160::from_str => {:?}", foo);
+    println!("H160::from_str short => {}", foo);
 }
 
 #[test]
