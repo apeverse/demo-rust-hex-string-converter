@@ -32,13 +32,13 @@ fn hash_hex_str() {
     println!("U256 => {:?}", bar);
 
     let foo = H256::from_uint(&bar);
-    println!("H256 from U256=> {:?}", foo);
+    println!("H256 from U256 => {:?}", foo);
 
     let bar = foo.as_bytes();
     println!("bytes (256bit) => {:x?}", bar);
 
     let dog : &[u8] = foo.as_bytes();
-    println!("&[u8]  => {:x?}", dog);
+    println!("&[u8] => {:x?}", dog);
 
     let zee : Vec<u8> = bar.into();
     println!("Vec<u8> => {:x?}", zee);
