@@ -7,12 +7,12 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-hex-literal = "0.2.1"
+hex-literal = "0.3.4"
 hex = { version = "0.4", default-features = false }
 hex_fmt = "0.3.0"
-rlp = "0.4"
+rlp = "0.5.2"
 log = "0.4"
-env_logger = "0.7"
-primitive-types = { version = "0.7.0", default-features = false, features = ["codec"] }
-##primitive-types = { version = "0.7", default-features = false, features = ["rlp"] }
-ethereum-types = "0.9.0"
+env_logger = "0.10.0"
+primitive-types = { version = "0.12.1", default-features = false, features = ["codec"] }
+##primitive-types = { version = "0.12.1", default-features = false, features = ["rlp"] }
+ethereum-types = "0.14.1"
